@@ -1,9 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Character {
 	String name;
 	String race;
 	int hp;
 	int attack;
 	int defense;
+	List<Item> items = new ArrayList<>();
+
 	String[] itemNames = new String[10];
 	int[] itemAttack = new int[10];
 	int[] itemDefense = new int[10];
@@ -19,41 +24,28 @@ public class Character {
 	}
 
 	public void addItem(String name, int atk, int def, int heal) {
-		itemNames[itemCount] = name;
-		itemAttack[itemCount] = atk;
-		itemDefense[itemCount] = def;
-		itemHeal[itemCount] = heal;
-		itemCount++;
+		items.add(new Item(name, atk, def, heal));
 	}
 
 	public void printInventory() {
 		System.out.println(name + "의 인벤토리:");
-		for (int i = 0; i < itemCount; i++) {
-			System.out.println("- " + itemNames[i] + " (공격력:" + itemAttack[i] + ", 방어력:" + itemDefense[i] + ", 회복력:" + itemHeal[i] + ")");
+		for (Item item : items) {
+			System.out.println(item);		
 		}
 	}
 
 	public void useItem(String itemName) {
-		for (int i = 0; i < itemCount; i++) {
-			if (itemNames[i].equals(itemName)) {
-				attack += itemAttack[i];
-				defense += itemDefense[i];
-				hp += itemHeal[i];
-				System.out.println(itemNames[i] + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
-				removeItem(i);
+		for (int i = 0; i < items.size(); i++) {
+			Item item = items.get(i);
+			if (item.getName().equals(itemName)) {
+				attack += item.getAttack();
+				defense += item.getDefense();
+				hp += item.getHeal();
+				System.out.println(item.getName() + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
+				items.remove(i);
 				break;
 			}
 		}
-	}
-
-	private void removeItem(int index) {
-		for (int i = index; i < itemCount - 1; i++) {
-			itemNames[i] = itemNames[i + 1];
-			itemAttack[i] = itemAttack[i + 1];
-			itemDefense[i] = itemDefense[i + 1];
-			itemHeal[i] = itemHeal[i + 1];
-		}
-		itemCount--;
 	}
 
 	public void attack(String enemyName, int enemyHp) {
@@ -77,23 +69,7 @@ public class Character {
 		return name;
 	}
 
-	public int getItemCount() {
-		return itemCount;
-	}
-
-	public String getItemName(int index) {
-		return itemNames[index];
-	}
-
-	public int getItemAttack(int index) {
-		return itemAttack[index];
-	}
-
-	public int getItemDefense(int index) {
-		return itemDefense[index];
-	}
-
-	public int getItemHeal(int index) {
-		return itemHeal[index];
+	public List<Item> getItems(){
+		return items;
 	}
 }
