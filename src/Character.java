@@ -10,12 +10,6 @@ public class Character {
 	List<Item> items = new ArrayList<>();
 	InventoryManager inventory = new InventoryManager();
 
-	String[] itemNames = new String[10];
-	int[] itemAttack = new int[10];
-	int[] itemDefense = new int[10];
-	int[] itemHeal = new int[10];
-	int itemCount = 0;
-
 	public Character(String name, String race, int hp, int attack, int defense) {
 		this.name = name;
 		this.race = race;
