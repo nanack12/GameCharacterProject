@@ -9,8 +9,7 @@ public class BattleSystem {
 				break;
 			}
 			System.out.println(enemyName + "의 반격!");
-			character.hp -= 15;
-			System.out.println(character.getName() + "의 남은 HP: " + character.getHp());
+			character.decreaseStat(0, 0,15);
 		}
 		System.out.println("전투 종료.");
 	}

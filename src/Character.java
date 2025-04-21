@@ -8,6 +8,7 @@ public class Character {
 	int attack;
 	int defense;
 	List<Item> items = new ArrayList<>();
+	InventoryManager inventory = new InventoryManager();
 
 	String[] itemNames = new String[10];
 	int[] itemAttack = new int[10];
@@ -23,29 +24,18 @@ public class Character {
 		this.defense = defense;
 	}
 
-	public void addItem(String name, int atk, int def, int heal) {
-		items.add(new Item(name, atk, def, heal));
+	public void increaseStat(int attackStat, int defenseStat, int hpStat){
+		this.attack += attackStat;
+		this.defense += defenseStat;
+		this.hp += hpStat;
+		System.out.println("현재 능력치 :  HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
 	}
 
-	public void printInventory() {
-		System.out.println(name + "의 인벤토리:");
-		for (Item item : items) {
-			System.out.println(item);		
-		}
-	}
-
-	public void useItem(String itemName) {
-		for (int i = 0; i < items.size(); i++) {
-			Item item = items.get(i);
-			if (item.getName().equals(itemName)) {
-				attack += item.getAttack();
-				defense += item.getDefense();
-				hp += item.getHeal();
-				System.out.println(item.getName() + " 아이템을 사용했습니다. 현재 능력치: HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
-				items.remove(i);
-				break;
-			}
-		}
+	public void decreaseStat(int attackStat, int defenseStat, int hpStat){
+		this.attack -= attackStat;
+		this.defense -= defenseStat;
+		this.hp -= hpStat;
+		System.out.println("현재 능력치 :  HP=" + hp + ", 공격력=" + attack + ", 방어력=" + defense);
 	}
 
 	public void attack(String enemyName, int enemyHp) {
@@ -71,5 +61,9 @@ public class Character {
 
 	public List<Item> getItems(){
 		return items;
+	}
+
+	public InventoryManager getInventory(){
+		return inventory;
 	}
 }
