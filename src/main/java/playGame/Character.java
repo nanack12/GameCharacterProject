@@ -1,5 +1,8 @@
 package playGame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Character {
 	String name;
 	String race;
@@ -11,6 +14,7 @@ public class Character {
 	int[] itemDefense = new int[10];
 	int[] itemHeal = new int[10];
 	int itemCount = 0;
+	private List<Item> item = new ArrayList<>();
 
 	public Character(String name, String race, int hp, int attack, int defense) {
 		this.name = name;
@@ -20,12 +24,16 @@ public class Character {
 		this.defense = defense;
 	}
 
-	public void addItem(String name, int atk, int def, int heal) {
+	public void addItem_list(String name, int atk, int def, int heal) {
 		itemNames[itemCount] = name;
 		itemAttack[itemCount] = atk;
 		itemDefense[itemCount] = def;
 		itemHeal[itemCount] = heal;
 		itemCount++;
+	}
+
+	public void addItem(String name, int atk, int def, int heal) {
+		item.add(new Item(name, atk, def, heal));
 	}
 
 	public void printInventory() {
@@ -75,27 +83,36 @@ public class Character {
 		return attack;
 	}
 
+	public int getDefense() {
+		return defense;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public int getItemCount() {
-		return itemCount;
+		//return itemCount;
+		return item.size();
 	}
 
 	public String getItemName(int index) {
-		return itemNames[index];
+		//return itemNames[index];
+		return item.get(index).getName();
 	}
 
 	public int getItemAttack(int index) {
-		return itemAttack[index];
+		//return itemAttack[index];
+		return item.get(index).getAttack();
 	}
 
 	public int getItemDefense(int index) {
-		return itemDefense[index];
+		//return itemDefense[index];
+		return item.get(index).getDefense();
 	}
 
 	public int getItemHeal(int index) {
-		return itemHeal[index];
+		//return itemHeal[index];
+		return item.get(index).getHeal();
 	}
 }
