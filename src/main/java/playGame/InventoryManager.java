@@ -1,3 +1,5 @@
+package playGame;
+
 public class InventoryManager {
 	public void printItemDetails(Character c) {
 		System.out.println("[아이템 상세 정보 출력 시작]");

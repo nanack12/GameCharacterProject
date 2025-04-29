@@ -1,3 +1,5 @@
+package playGame;
+
 public class Character {
 	String name;
 	String race;
